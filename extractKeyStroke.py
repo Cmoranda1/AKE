@@ -39,15 +39,17 @@ def extractKeyStroke(filename, mode, threshold):
         k += 1
 
     numOfClicks = clicksRecognized
-    keys = [[0 for x in range(numOfClicks)]for y in range(int(clickSize))]
+    #keys = [[0 for x in range(numOfClicks)]for y in range(int(clickSize))]
+    keys = [[0 for x in range(int(clickSize))]for y in range(numOfClicks)]
     for i in range(numOfClicks):
         if(clickPositions[i] != 0):
             startIndex = clickPositions[i] - 101
             endIndex = startIndex+int(clickSize) - 1
         if(startIndex >=0 and endIndex < np.size(rawSound)):
             keys[i] = rawSound[int(startIndex):int(endIndex)]
-    #pushPeak = np.zeros(numOfClicks*441)
-    pushPeak = [[0 for x in range(numOfClicks)]for y in range(441)]
+
+    #pushPeak = [[0 for x in range(numOfClicks)]for y in range(441)]
+    pushPeak = [[0 for x in range(441)]for y in range(numOfClicks)]
     x = 0
     for i in range(numOfClicks):
         #pushPeak[x:x+441] = keys[i][0:441]
